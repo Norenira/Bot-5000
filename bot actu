@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
+from bot_logic import ctn,emote,moneda
 import math
+import random
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -23,27 +25,43 @@ async def calculator(ctx,op="",num1=0,num2=0):
 
     if op=="suma":
         resultado=num1+num2
-        await(f"la suma de{num1} + {num2} es :{resultado}")
+        await ctx.send(f"la suma de{num1} + {num2} es :{resultado}")
 
     elif op=="resta":
         resultado=num1-num2
-        await(f"la resta de{num1} - {num2} es :{resultado}")
+        await ctx.send(f"la resta de{num1} - {num2} es :{resultado}")
 
     elif op=="multiplicacion":
         resultado=num1*num2
-        await(f"la multiplicacion de{num1} * {num2} es :{resultado}")
+        await ctx.send(f"la multiplicacion de{num1} * {num2} es :{resultado}")
 
     elif op=="division":
         if num2!=0:
             resultado=num1/num2
-            await(f"la resta de{num1} - {num2} es :{resultado}")
+            await ctx.send(f"la division de{num1} sobre {num2} es :{resultado}")
         else:
-            await("la division entre 0 no es posible")
+            await ctx.send("la division entre 0 no es posible")
     elif op=="raiz":
-        resultado=num1**(1/num2)
-        await(f"la raiz{num1} de {num2} es :{resultado}")
+        resultado=num2**(1/num1)
+        await ctx.send(f"la raiz{num2} de {num1} es :{resultado}")
         
     else:
-        await("la operacion aun no existe en esta calculadora")
+        await ctx.send("la operacion aun no existe en esta calculadora")
+@bot.command()
+async def hola(ctx):
+        await ctx.send("holanda :p")
+@bot.command()
+async def bye(ctx):
+        await ctx.send("Hay nos vidrios :b")
+@bot.command()
+async def gencontra(ctx):
+        c= random.randint(3,13)
+        await ctx.send(f"tu contra es: {ctn(c)}")
+@bot.command()
+async def emotes(ctx):
+        await ctx.send({emote()})
+@bot.command()
+async def money(ctx):
+        await ctx.send(f"La moneda salio...{moneda()}")
 
-bot.run("git hub me recomienda no colocar el token para que no se roben el bot....xd")
+bot.run("Mi token")
